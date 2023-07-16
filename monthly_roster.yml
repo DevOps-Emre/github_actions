@@ -1,0 +1,23 @@
+name: Generate Monthly Roster
+
+on:
+  schedule:
+    - cron: '0 0 1 * *'  # Ayın ilk günü saat 00:00'da tetiklenecektir
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Bash
+      run: |
+        sudo apt update
+        sudo apt install -y bash
+
+    - name: Run Bash script
+      run: |
+        chmod +x monthly_roster.sh
+        ./monthly_roster.sh
